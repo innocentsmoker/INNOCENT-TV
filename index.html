@@ -523,16 +523,16 @@
         <div class="container">
             <div class="header-content">
                 <div class="logo">
-                    <i class="fas fa-film"></i>
+                    <i class="fas fa-film" aria-hidden="true"></i>
                     <h1>PlexFlix</h1>
                 </div>
                 <div class="search-container">
-                    <input type="text" class="search-box" placeholder="Search for movies...">
-                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" class="search-box" placeholder="Search for movies..." aria-label="Search for movies">
+                    <i class="fas fa-search search-icon" aria-hidden="true"></i>
                 </div>
                 <div class="user-actions">
-                    <button><i class="fas fa-home"></i></button>
-                    <button><i class="fas fa-user"></i></button>
+                    <button aria-label="Home"><i class="fas fa-home"></i></button>
+                    <button aria-label="User profile"><i class="fas fa-user"></i></button>
                 </div>
             </div>
         </div>
@@ -540,18 +540,18 @@
     
     <main class="main-content">
         <div class="container">
-            <h2 class="section-title"><i class="fas fa-fire"></i> Popular Movies</h2>
+            <h2 class="section-title"><i class="fas fa-fire" aria-hidden="true"></i> Popular Movies</h2>
             
             <div class="movies-grid" id="movies-grid">
                 <!-- Movie cards will be inserted here by JavaScript -->
             </div>
             
             <div class="loading" id="loading" style="display: none;">
-                <i class="fas fa-spinner fa-spin"></i> Searching for movies...
+                <i class="fas fa-spinner fa-spin" aria-hidden="true"></i> Searching for movies...
             </div>
             
             <div class="empty-state" id="empty-state" style="display: none;">
-                <i class="fas fa-film"></i>
+                <i class="fas fa-film" aria-hidden="true"></i>
                 <h3>No movies found</h3>
                 <p>Try adjusting your search terms or browse our popular selections.</p>
             </div>
@@ -562,7 +562,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <div class="modal-backdrop" id="modal-backdrop"></div>
-                <button class="modal-close" id="modal-close"><i class="fas fa-times"></i></button>
+                <button class="modal-close" id="modal-close" aria-label="Close modal"><i class="fas fa-times"></i></button>
                 <img class="modal-poster" id="modal-poster" src="" alt="Movie Poster">
             </div>
             <div class="modal-body">
@@ -607,7 +607,7 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-logo">
-                    <i class="fas fa-film"></i>
+                    <i class="fas fa-film" aria-hidden="true"></i>
                     <span>PlexFlix</span>
                 </div>
                 <div class="footer-links">
@@ -783,7 +783,7 @@
                 const movieCard = document.createElement('div');
                 movieCard.className = 'movie-card';
                 movieCard.innerHTML = `
-                    <img src="${movie.poster}" alt="${movie.title}" class="movie-poster">
+                    <img src="${movie.poster}" alt="${movie.title}" class="movie-poster" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjMwMCIgdmlld0JveD0iMCAwIDIwMCAzMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIyMDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjMkEyQTJBIi8+CjxwYXRoIGQ9Ik04MCAxMjBIMTIwVjE2MEg4MFYxMjBaIiBmaWxsPSIjODg4ODg4Ii8+CjxwYXRoIGQ9Ik02MCA2MEgxNDBWODBINjBWNjBaIiBmaWxsPSIjODg4ODg4Ii8+CjxwYXRoIGQ9Ik00MCAyMjBIMTYwVjI0MEg0MFYyMjBaIiBmaWxsPSIjODg4ODg4Ii8+Cjwvc3ZnPgo='">
                     <div class="movie-info">
                         <h3 class="movie-title">${movie.title}</h3>
                         <div class="movie-year">${movie.year}</div>
@@ -881,6 +881,13 @@
         // Close modal when clicking outside the content
         movieModal.addEventListener('click', function(event) {
             if (event.target === movieModal) {
+                closeMovieModal();
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
                 closeMovieModal();
             }
         });
